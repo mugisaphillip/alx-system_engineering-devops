@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# prints Hi on 9th iteration
+
+COUNTER=1
+while [ $COUNTER -le 10 ]
+do
+	if [ $COUNTER == 9 ]
+	then
+		echo "Hi"
+	else
+		echo "Best School"
+	fi
+	let COUNTER+=1
+done
