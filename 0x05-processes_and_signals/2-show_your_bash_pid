@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# prints bash processes only
+
+ps -faux | grep "bash"
