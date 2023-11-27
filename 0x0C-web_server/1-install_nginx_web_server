@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# set up nginx web server
+
+# update up local repository and install nginx
+sudo apt-get update -y && \
+	apt-get install nginx -y
+
+# start nginx service
+sudo service nginx start
+
+# allow nginx on firewall
+sudo ufw all 'Nginx HTTP'
+
+sudo chown -R "$USER":"$USER" /var/www/html
+sudo chmod -R 755 /var/www
+
+# make back up of default server block
+cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
+
+# update html page
+echo -e "Hello World!" | dd status=none of=/var/www/html/index.nginx-debian.html
+
+# restart nginx service
+sudo service nginx restart
