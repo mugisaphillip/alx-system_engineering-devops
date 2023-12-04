@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Double the number of webservers
 
 # update local repository
 sudo apt-get update -y
