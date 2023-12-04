@@ -1,21 +1,39 @@
 #!/usr/bin/env bash
-# install HXProxy Load Balancer
+#Installs and configures HAproxy in a load balancer server
 
-sudo apt-get install
+apt-get -y install --no-install-recommends software-properties-common
+add-apt-repository ppa:vbernat/haproxy-2.6 -y
+apt-get install -y haproxy=2.6.\*
 
-# install HAProxy
-sudo apt-get -y install haproxy
+echo "ENABLED=1" >> /etc/default/haproxy
+mv /etc/haproxy/haproxy.cfg{,.original}
+touch /etc/haproxy/haproxy.cfg
 
-sudo tee /etc/haproxy/haproxy.cfg > /dev/null <<'EOF'
-frontend web
-	bind *:80
-	mode http
-	default_backend app
-backend app
-	balance roundrobin
-	server 224300-web-01 100.26.156.4:80 check
-	server 224300-web-02 100.25.109.154:80 check
-EOF
-sudo chown  $USER:$USER /etc/haproxy/haproxy.cfg
+printf %s "global
+    log 127.0.0.1 local0 notice
+    maxconn 2000
+    user haproxy
+    group haproxy
+defaults
+    log     global
+    mode    http
+    option  httplog
+    option  dontlognull
+    retries 3
+    option redispatch
+    timeout connect  5000
+    timeout client  10000
+    timeout server  10000
+listen mugisa
+    bind 0.0.0.0:80
+    mode http
+    stats enable
+    stats uri /haproxy?stats
+    balance roundrobin
+    option httpclose
+    option forwardfor
+    server 224300-web-01 100.26.156.4:80 check
+    server 224300-web-02 100.25.109.154:80 check
+" >> /etc/haproxy/haproxy.cfg
 
-sudo service haproxy restart
+service haproxy start
