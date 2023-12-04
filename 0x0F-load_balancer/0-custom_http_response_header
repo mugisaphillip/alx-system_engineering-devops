@@ -2,7 +2,7 @@
 # Double the number of webservers
 
 # update local repository
-sudo apt-get update -y
+sudo apt-get update
 
 # install nginx
 sudo apt-get install nginx -y
