@@ -30,9 +30,8 @@ frontend web
     default_backend app
 backend app
     balance roundrobin
-    server 1542-web-01 34.73.222.49:80 check
-    server 224300-web-01 100.26.156.4:80 check
-    server 224300-web-02 100.25.109.154:80 check
+    server 224300-web-01 100.26.239.214:80 check
+    server 224300-web-02 34.229.255.255:80 check
 " >> /etc/haproxy/haproxy.cfg
 
 service haproxy start
