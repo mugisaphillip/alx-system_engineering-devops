@@ -16,5 +16,6 @@ if __name__ == "__main__":
 
     with open(f"{e_id}.csv", "w") as file:
         for t in todos:
-            file.writelines(f'''"{e_id}","{name}","{t.get("completed")}",
-                            "{t.get("title")}"\n''')
+            o = f'"{e_id}","{name}","{t.get("completed")}"'
+            o = o + ',"{t.get("title")}"\n'
+            file.writelines(o)
