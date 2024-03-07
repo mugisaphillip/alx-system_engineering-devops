@@ -9,7 +9,7 @@ sudo apt-get update -y && \
 sudo service nginx start
 
 # allow nginx on firewall
-sudo ufw all 'Nginx HTTP'
+sudo ufw allow 'Nginx HTTP'
 
 sudo chown -R "$USER":"$USER" /var/www/html
 sudo chmod -R 755 /var/www

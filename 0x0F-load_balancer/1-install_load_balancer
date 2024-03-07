@@ -9,29 +9,18 @@ echo "ENABLED=1" >> /etc/default/haproxy
 mv /etc/haproxy/haproxy.cfg{,.original}
 touch /etc/haproxy/haproxy.cfg
 
-printf %s "global
-    log 127.0.0.1 local0 notice
-    maxconn 2000
-    user haproxy
-    group haproxy
+printf %s "
 defaults
-    log     global
-    mode    http
-    option  httplog
-    option  dontlognull
-    retries 3
-    option redispatch
-    timeout connect  5000
-    timeout client  10000
-    timeout server  10000
-frontend web
+    timeout client 30s
+    timeout server 30s
+    timeout connect 5s
+frontend mugisa
     bind *:80
-    mode http
     default_backend app
 backend app
     balance roundrobin
-    server 224300-web-01 100.26.239.214:80 check
-    server 224300-web-02 34.229.255.255:80 check
+    server 224300-web-01 34.204.81.122:80 check
+    server 224300-web-02 34.224.3.85:80 check
 " >> /etc/haproxy/haproxy.cfg
 
-service haproxy start
+service haproxy restart
