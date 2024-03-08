@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# fix nginx not running on port 80
+
+cd /etc/nginx/sites-enabled/ || exit;
+
+#remove default config
+rm default
+
+# create symbolic link
+ln -s /etc/nginx/sites-available/default default;
+
+# restart
+service nginx restart
