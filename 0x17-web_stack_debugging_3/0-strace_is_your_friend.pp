@@ -1,4 +1,4 @@
-# Create manifest to fix all termintion of php.
+# Create manifest to fix all termintion of phpp.
 
 exec { 'fix_phpp':
   command => 'sed -i s/phpp/php/g /var/www/html/wp-settings.php',
