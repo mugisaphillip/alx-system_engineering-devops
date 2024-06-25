@@ -19,8 +19,8 @@ frontend mugisa
     default_backend app
 backend app
     balance roundrobin
-    server 224300-web-01 34.204.81.122:80 check
-    server 224300-web-02 34.224.3.85:80 check
+    server 224300-web-01 54.160.72.54:80 check
+    server 224300-web-02 54.197.128.88:80 check
 " >> /etc/haproxy/haproxy.cfg
 
 service haproxy restart
